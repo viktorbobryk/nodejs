@@ -1081,12 +1081,8 @@ module.exports = (function () {
 		}
 
 		result = sumAvg / marks.length;
-
-		//console.log (result);
 		return result;
 	};
-
-	//countAvgMarkGroup("B", "phisics");
 	
 	var countAbsentsOfGroup = function(groupName, subject) {
 		var result = null;
@@ -1123,11 +1119,8 @@ module.exports = (function () {
 			} 
 		}
 
-		//console.log (absent);
 		return absent;
 	};
-
-	//countAbsentsOfGroup("A", "phisics");
 	
 	var countAvgMark = function(csubject){
 		var result = 0;
@@ -1155,11 +1148,8 @@ module.exports = (function () {
 			}
 
 		result = sumAvg / marks.length;
-
-		//console.log (result);
 		return result;
 	};
-	//countAvgMark("css");
 	
 	var countCommonAbsents = function(csubject){
 		var result = 0;
@@ -1188,10 +1178,8 @@ module.exports = (function () {
 			}
 			}
 
-		//console.log (absent);
 		return absent;
 	};
-	//countCommonAbsents("css");
 	
 	var countAvgMarkStudent = function(studentName) {
 		var result = null;
@@ -1217,7 +1205,6 @@ module.exports = (function () {
 
 		resultStud = sumAvg / student.marks.length;
 
-		//console.log (resultStud);
 		return resultStud;
 	};
 	
@@ -1247,11 +1234,8 @@ module.exports = (function () {
 			
 		}
 
-		//console.log (absent);
 		return absent;
 	};
-	//countAbsent("Lida");
-	//countAvgMarkStudent("Lida");
 	
 	return {
 		countAvgMarkStudent: countAvgMarkStudent,

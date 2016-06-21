@@ -1,4 +1,4 @@
-var keysModule = require('./keysModule.js');
+var studentsModule = require('./studentsModule.js');
 
 module.exports = (function() {
 	var getPage = function (params) {
@@ -11,7 +11,40 @@ module.exports = (function() {
 	};
 	
 	var getPageHead = function () {
-		return '<head><title>No way</title></head>';
+		return '<head>' +
+		'<title>Statistic</title>' +
+
+		'<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>' +
+		'<style>' +
+			'input{' +
+				'width:90%;' +
+				'margin-left:5%;' +
+				'margin-bottom:5px;' +
+			'}' +
+			'div{' +
+				'border:1px solid black;' +
+				'height:200px;' +
+				'width:32%;' +
+				'margin:5px;' +
+				'float:left;' +
+			'}' +
+			'h3{' +
+				'text-align:center;' +
+			'}' +
+			'h4{' +
+				'text-align:center;' +
+			'}' +
+			'button{' +
+				'width:90%;' +
+				'margin-left:5%;' +
+			'}' +
+			
+			'.content{' +
+				'width:98%;' +
+				'height:30%;' +
+			'}' +
+		'</style>' +
+		'</head>';
 	};
 	
 	var getPageHeader = function () {
@@ -23,17 +56,17 @@ module.exports = (function() {
 	};
 	
 	var getMain = function (params) {
-		return '<main><h1>Keys</h1>' +
-		getSearchForm() +		
+		return '<main>' +
+		getForm() +		
 		'</main>';
 	};
-	var getSearchForm = function () {		
+	var getForm = function () {		
 	return '<form method="POST">' + 
 			'<div id="allgroup">' +
 				'<h3>Common statistic</h3>' +
 				'<h4>enter name of subject</h4>' +
 				'<input type="text" name="csubject" id = "csubject"/>' +
-				'<button onclick = "search()">Check</button>' +
+				'<button onserverclick = "search()">Check</button>' +
 			'</div>' +
 
 			'<div>' +
@@ -41,34 +74,30 @@ module.exports = (function() {
 				'<h4>enter name of group and subject</h4>' +
 				'<input type="text" name="group" id = "group"/>' +
 				'<input type="text" name="subject" id = "subject"/>' +
-				'<button onclick = "search()">Check</button>' +
+				'<button onserverclick = "search()">Check</button>' +
 			'</div>' +
 			
 			'<div>' +
 				'<h3>Statistic of student</h3>' +
 				'<h4>enter name of student</h4>' +
 				'<input type="text" name="student" id = "student"/>' +
-				'<button onclick = "search()">Check</button>' +
+				'<button onserverclick = "search()">Check</button>' +
 			'</div>' +
 			'<div class = "content" id ="result"></div>' +
 		
 		'</form>';
+		
+	
 	};
 	
-	function search(){
+		function search(){
+	console.log('hello');
 	var studentName = $("#student").val();
 	var groupName = $("#group").val();
 	var csubject = $("#csubject").val();
 	var subject = $("#subject").val();
-	//console.log(csubject);
-	//console.log(groupName);
-	console.log(studentName);
 	var res = [];
 	var absent = [];
-	if(!studentsName){
-		var res = moduleStat.getAllKeysTable();
-		$("#result").html("hello" + ress);
-	}
 	if(studentName){
 		res = moduleStat.countAvgMarkStudent(studentName);
 		absent = moduleStat.countAbsent(studentName);
@@ -83,6 +112,7 @@ module.exports = (function() {
 		res = moduleStat.countAvgMark(csubject);
 		absent = moduleStat.countCommonAbsents(csubject);
 		$("#result").html('average result all groups of subject ' + csubject + ' is : ' + res + '<br>'  + ' all groups have ' + absent + " absents ");
+	}
 	}
 	
 	return {
