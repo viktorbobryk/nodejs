@@ -1,69 +1,91 @@
-var weatherModule = require("./weatherModule");
+var keysModule = require('./keysModule.js');
+
 module.exports = (function() {
 	var getPage = function (params) {
-		return '<html>' + getPageHead() +
-		'<body>' + 
-		getPageHeader() + 
-		getMain(params) +
-		getPageFooter() +
-		'</body></html>';
+	return '<html lang="en">' + getPageHead() +
+	'<body>' + 
+	getPageHeader() + 
+	getMain(params) +
+	getPageFooter() +
+	'</body></html>';
 	};
+	
 	var getPageHead = function () {
-		return '<head>
-					<title>Weather</title>
-					<meta charset="UTF-8">
-					<meta name="viewport" content="width=device-width, initial-scale=1">
-					<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
-					<link rel="stylesheet" type="text/css" href="style.css"/>	
-					<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-					<script type="text/javascript" src="main_wether.js"></script>
-				</head>'
+		return '<head><title>No way</title></head>';
 	};
+	
 	var getPageHeader = function () {
-		return '<header>sinoptik.rv.ua</header>';
+		return '<header></header>';
 	};
+	
 	var getPageFooter = function () {
 		return '<footer></footer>';
 	};
+	
 	var getMain = function (params) {
-		return '<main>	
-<div class="container center">
-		<h1>sinoptik.rv.ua</h1>
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 center">
-				<h3>general information</h3>
-					<div class="lineText">
-						<button onclick="stat()">Open</button>
-					</div>
-					<div id="result"></div>
-					<h3>city information</h3>
-					<h4>enter name of city</h4>
-					<h6>(Rivne, Kyiv, Lviv, London)</h6>
-				<input type="text" name="city" id = "city"/>
-				<button onclick = "cityStat()">Search</button>
-				<div id="cityresult"></div>
-			</div>
-				<h3>Search maximum value</h3>	
-				<select id="selectOption">
-					<option value="-">chooth option</option>
-					<option value="maxTemp">
-						temperature
-					</option>
-					<option value="maxHym">
-						humidity 
-					</option>
-					<option value="maxWindPow">
-						wind power
-					</option>
-				</select>
-				<button onclick="search()">Search</button>
-				<div class="foundText">					
-					<p id = "maxParameter"></p>					
-				</div>
-			</div>
-		</div>
-	</div>		
-		</main>';
+		return '<main><h1>Keys</h1>' +
+		getSearchForm() +		
+		'</main>';
+	};
+	var getSearchForm = function () {		
+	return '<form method="POST">' + 
+			'<div id="allgroup">' +
+				'<h3>Common statistic</h3>' +
+				'<h4>enter name of subject</h4>' +
+				'<input type="text" name="csubject" id = "csubject"/>' +
+				'<button onclick = "search()">Check</button>' +
+			'</div>' +
+
+			'<div>' +
+				'<h3>Statistic of group</h3>' +
+				'<h4>enter name of group and subject</h4>' +
+				'<input type="text" name="group" id = "group"/>' +
+				'<input type="text" name="subject" id = "subject"/>' +
+				'<button onclick = "search()">Check</button>' +
+			'</div>' +
+			
+			'<div>' +
+				'<h3>Statistic of student</h3>' +
+				'<h4>enter name of student</h4>' +
+				'<input type="text" name="student" id = "student"/>' +
+				'<button onclick = "search()">Check</button>' +
+			'</div>' +
+			'<div class = "content" id ="result"></div>' +
+		
+		'</form>';
 	};
 	
-})
+	function search(){
+	var studentName = $("#student").val();
+	var groupName = $("#group").val();
+	var csubject = $("#csubject").val();
+	var subject = $("#subject").val();
+	//console.log(csubject);
+	//console.log(groupName);
+	console.log(studentName);
+	var res = [];
+	var absent = [];
+	if(!studentsName){
+		var res = moduleStat.getAllKeysTable();
+		$("#result").html("hello" + ress);
+	}
+	if(studentName){
+		res = moduleStat.countAvgMarkStudent(studentName);
+		absent = moduleStat.countAbsent(studentName);
+		$("#result").html('average result ' + studentName + ' is : ' + res + '<br>' + studentName + ' has ' + absent + " absents ");	
+	}
+	if(groupName){
+		res = moduleStat.countAvgMarkGroup(groupName, subject);
+		absent = moduleStat.countAbsentsOfGroup(groupName, subject);
+		$("#result").html('average result group ' + groupName + ' of subject ' + subject + ' is : ' + res + '<br>' + ' group has ' + absent + " absents " );
+	}
+	if(csubject){
+		res = moduleStat.countAvgMark(csubject);
+		absent = moduleStat.countCommonAbsents(csubject);
+		$("#result").html('average result all groups of subject ' + csubject + ' is : ' + res + '<br>'  + ' all groups have ' + absent + " absents ");
+	}
+	
+	return {
+	getPage: getPage
+	};
+})();
