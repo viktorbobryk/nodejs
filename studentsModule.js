@@ -1123,7 +1123,7 @@ module.exports = (function () {
 	};
 	
 	var countAvgMark = function(csubject){
-		var result = 0;
+		var result = null;
 		var marks = [];
 		for(var i = 0; i < catalog.length; i++){
 			

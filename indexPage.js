@@ -12,35 +12,7 @@ module.exports = (function() {
 	var getPageHead = function () {
 		return '<head>' +
 		'<title>Statistic</title>' +
-		'<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>' +
-		'<style>' +
-			'input{' +
-				'width:90%;' +
-				'margin-left:5%;' +
-				'margin-bottom:5px;' +
-			'}' +
-			'div{' +
-				'border:1px solid black;' +
-				'height:200px;' +
-				'width:32%;' +
-				'margin:5px;' +
-				'float:left;' +
-			'}' +
-			'h3{' +
-				'text-align:center;' +
-			'}' +
-			'h4{' +
-				'text-align:center;' +
-			'}' +
-			'button{' +
-				'width:90%;' +
-				'margin-left:5%;' +
-			'}' +
-			'.content{' +
-				'width:98%;' +
-				'height:30%;' +
-			'}' +
-			'</style>' +
+		'<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>' + '<link rel="stylesheet" href="http://localhost:3000/style.css"/>' +
 		'</head>';
 	};
 	
@@ -114,8 +86,8 @@ module.exports = (function() {
 				var avgMark = studentsModule.countAvgMark(params.csubject);
 				var abs = studentsModule.countCommonAbsents(params.csubject);
 				var res;
-				console.log(avgMark);
-				if(avgMark != NaN){
+				console.log(typeof(avgMark));
+				if(avgMark == "NaN"){
 					res = "Name of subject is not found. Check it and try again";
 				}
 				else{ res = "average mark all students of all groups on the subject " + params.csubject + " are : " + avgMark + " and they have " + abs + " absents " ;
