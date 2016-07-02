@@ -1,5 +1,4 @@
 var studentsModule = require('./studentsModule.js');
-//var search = require('./search.js');
 module.exports = (function() {
 	var getPage = function (params) {
 	return '<html lang="en">' + getPageHead() +
@@ -86,30 +85,52 @@ module.exports = (function() {
 		};
 		var getResult = function(params){
 			var data = getViewData(params);
+			console.log(data);
+			if (!data.length) {
+			return '<div class = "content" id ="result">Enter the name, please</div>';;
+			}
+			else{
 			var result = '<div class = "content" id ="result">'  + data + '</div>';
 			return result;
+			}
 		}
 		var getViewData = function (params){
-			console.log(params);
 			if(!params){
 				return "No params was enter";
 			}
-			if(params.student){
+			else if(params.student){
 				var studres = studentsModule.countAvgMarkStudent(params.student);
 				var abs = studentsModule.countAbsent(params.student);
-				var res = params.student + " has average result : " + studres + " and has " + abs +" absents ";
+				var res;
+				if(studres == null){
+					res = "Name of student is not found. Check it and try again";
+				}
+				else{
+				res = params.student + " has average result : " + studres + " and has " + abs +" absents ";
+				}
 				return res;
 			}
 			else if(params.csubject){
 				var avgMark = studentsModule.countAvgMark(params.csubject);
 				var abs = studentsModule.countCommonAbsents(params.csubject);
-				var res = "average mark all students of all groups on the subject " + params.csubject + " are : " + avgMark.toFixed(2) + " and they have " + abs + " absents " ;
+				var res;
+				console.log(avgMark);
+				if(avgMark != NaN){
+					res = "Name of subject is not found. Check it and try again";
+				}
+				else{ res = "average mark all students of all groups on the subject " + params.csubject + " are : " + avgMark + " and they have " + abs + " absents " ;
+				}
 				return res;
 			}
 			else if(params.group && params.subject){
 				var avgMark = studentsModule.countAvgMarkGroup(params.group, params.subject);
 				var absent = studentsModule.countAbsentsOfGroup(params.group, params.subject);
-				var res = "average result group " + params.group + " of subject " + params.subject + " is : " + avgMark + "<br>" + " group has " + absent + " absents " ;
+				var res;
+				if(avgMark == null){
+					res = "Name of group or subject is not found. Check it and try again";
+				}
+				else{ res = "average result group " + params.group + " of subject " + params.subject + " is : " + avgMark + "<br>" + " group has " + absent + " absents " ;
+				}
 				return res;
 			}
 			else{

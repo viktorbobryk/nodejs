@@ -1081,7 +1081,7 @@ module.exports = (function () {
 		}
 
 		result = sumAvg / marks.length;
-		return result;
+		return (result).toFixed(2);
 	};
 	
 	var countAbsentsOfGroup = function(groupName, subject) {
@@ -1148,7 +1148,7 @@ module.exports = (function () {
 			}
 
 		result = sumAvg / marks.length;
-		return result;
+		return (result).toFixed(2);
 	};
 	
 	var countCommonAbsents = function(csubject){
@@ -1205,7 +1205,7 @@ module.exports = (function () {
 
 		resultStud = sumAvg / student.marks.length;
 
-		return resultStud;
+		return (resultStud).toFixed(2);
 	};
 	
 	
